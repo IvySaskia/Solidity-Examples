@@ -1,0 +1,149 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "recipientAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "duration",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "claimTimeout",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "signature",
+						"type": "bytes"
+					}
+				],
+				"name": "close",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "expiration",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newExpiration",
+						"type": "uint256"
+					}
+				],
+				"name": "extend",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "recipient",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sender",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"claimTimeout()": {
+					"notice": "if the timeout is reached without the recipient closing the channel, then the Ether is released back to the sender."
+				},
+				"close(uint256,bytes)": {
+					"notice": "the recipient can close the channel at any time by presenting a signed amount from the sender. the recipient will be sent that amount, and the remainder will go back to the sender"
+				},
+				"extend(uint256)": {
+					"notice": "the sender can extend the expiration at any time"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Micropayment Channel/SimplePaymentChannel.sol": "SimplePaymentChannel"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Micropayment Channel/SimplePaymentChannel.sol": {
+			"keccak256": "0x33713ffc8aa057604f08e3163dcd2899317d13ac295f99bbf79a458efee1362b",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://5e5fe75aa4dd031d3d0dbe163281b54f2f0c9bb004c0bed77f27ebec14282077",
+				"dweb:/ipfs/QmSFGQAukgZjW67fNvoR8AhLKJWYihYMLoNsA9Bmm5JAcB"
+			]
+		}
+	},
+	"version": 1
+}
