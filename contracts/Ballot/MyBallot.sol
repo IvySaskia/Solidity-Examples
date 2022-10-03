@@ -56,19 +56,16 @@ contract MyBallot {
         require(sender.canVote, "Has no right to vote");
         require(!sender.hasVoted, "Already voted.");
 
-        uint indexCandidate;
-
         for (uint index = 0; index < candidates.length; index++) {
             if(keccak256(abi.encode(candidates[index].name)) == keccak256(abi.encode(name)))
-                indexCandidate = index;
-                candidates[indexCandidate].votesCount ++;
+                candidates[index].votesCount ++;
                 sender.hasVoted = true;
         }
     }
 
     function getWinningProposal() public view returns (uint winningProposal)
     {
-        uint winningVoteCount = 0;
+        uint winningVoteCount;
 
         for (uint indexCandidate = 0; indexCandidate < candidates.length; indexCandidate++) {
             if (candidates[indexCandidate].votesCount > winningVoteCount) {
@@ -89,5 +86,12 @@ contract MyBallot {
 
     function getContractAddress() public view returns (address) {
         return address(this);
+    }
+
+    function calculateAmountOfTotalVotes() public view returns (uint total) {
+                
+        for (uint index = 0; index < candidates.length; index++) {
+            total += candidates[index].votesCount;
+        }
     }
 }

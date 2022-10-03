@@ -22,6 +22,19 @@
 				"type": "constructor"
 			},
 			{
+				"inputs": [],
+				"name": "calculateAmountOfTotalVotes",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "total",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -211,11 +224,11 @@
 	},
 	"sources": {
 		"contracts/Ballot/MyBallot.sol": {
-			"keccak256": "0xf3dda5bf8649ee092df2ca8474b4cf4d27bc8632eb5c0622bd19dcbe4b4c7fc9",
+			"keccak256": "0x91579a0f1f9a2690e2cb54ceaf96e0882ad967fb8d55805a913a6b5b89c5b21b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2468cb32ae864197eb811e30a04c8cbcb6de86dc7695e8c6219a0fd9fcb87895",
-				"dweb:/ipfs/QmPfNxEENcg1mg9BdeSYLnV6BgmBUQQmmgBuH9o3uuhyNA"
+				"bzz-raw://829f114c51e9c90000c0d8b547ee439a27a16b599e2a3a320936a550c9896647",
+				"dweb:/ipfs/QmbNzFfe1NnRvxx6hn7As7FYsCvXtS9ytaC8bvpXPA1yAw"
 			]
 		}
 	},
