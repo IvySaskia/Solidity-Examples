@@ -239,6 +239,11 @@
 						"internalType": "uint256",
 						"name": "winningProposal",
 						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isTie",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -374,11 +379,11 @@
 	},
 	"sources": {
 		"contracts/Ballot/MyBallot.sol": {
-			"keccak256": "0x1018c7aaabff7fadc59a2495e834aa361a0d36135dcc0fc3be6fcd9b86ac580f",
+			"keccak256": "0x525d259378f7be6e4de67c0cb59c1988a7bfca880b41bd9ca4ff304c19c0ba88",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8ed92edb621624e7fd8f658314cb5dd9ab800dea5d93b2b1cdbb8d03d09fa314",
-				"dweb:/ipfs/QmdCPMUduR1zZDwL2NKRnq49go9vDXyyqQ4WYb6S1YbEpn"
+				"bzz-raw://387dc53399f5a0b5b070252f60aef52564077d3978c6169d57fdc57f16d67c6d",
+				"dweb:/ipfs/Qmc4QQvEon1HhmSraPVNSPrL1m9ouLRueMfh1FwkCk42Rk"
 			]
 		},
 		"solidity-string-util/contracts/StringUtil.sol": {

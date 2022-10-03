@@ -91,7 +91,6 @@ contract MyBallot {
         _;
     }
 
-
     // FUNCTIONS
 
     function addCandidateWithSpreadParameters(string memory name, string memory party) public isContractOwnerAddCandidate() {
@@ -123,16 +122,24 @@ contract MyBallot {
     }
 
     function getWinnerName() public view returns (string memory winnerName) {
-        winnerName = candidates[getWinningCandidate()].name;
+        (uint winningProposal, bool isTie) = getWinningCandidate();
+        require(
+            !isTie,
+            "There is a tie on Ballot"
+        );
+        winnerName = candidates[winningProposal].name;
     }
 
-    function getWinningCandidate() public view returns (uint winningProposal) {
+    function getWinningCandidate() public view returns (uint winningProposal, bool isTie) {        
         uint winningVoteCount;
 
         for (uint indexCandidate = 0; indexCandidate < candidates.length; indexCandidate++) {
             if (candidates[indexCandidate].votesCount > winningVoteCount) {
                 winningVoteCount = candidates[indexCandidate].votesCount;
                 winningProposal = indexCandidate;
+                isTie = false;
+            } else if (candidates[indexCandidate].votesCount == winningVoteCount) {
+                isTie = true;
             }
         }
     }
