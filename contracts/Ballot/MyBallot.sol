@@ -27,20 +27,37 @@ contract MyBallot {
 
     uint public totalVotes; // alternative for calculateAmountOfTotalVotes
 
-    constructor(string[] memory proposalCandidatesName, string[] memory proposalCandidatesParty) {
+    // CONSTRUCTOR
+
+    constructor(Candidate[] memory _candidates) {
         
         contractOwner = msg.sender;
 
-        for (uint index = 0; index < proposalCandidatesName.length; index++) {
+        for (uint index = 0; index < _candidates.length; index++) {
             candidates.push(Candidate({
-                name: proposalCandidatesName[index],
-                party: proposalCandidatesParty[index],
+                name: _candidates[index].name,
+                party: _candidates[index].party,
                 votesCount: 0
             }));
         }
     }
 
-    // modifiers
+    // constructor 2 // overloading constructor is not allowed
+    // constructor(string[] memory proposalCandidatesName, string[] memory proposalCandidatesParty) {
+        
+    //     contractOwner = msg.sender;
+
+    //     for (uint index = 0; index < proposalCandidatesName.length; index++) {
+    //         candidates.push(Candidate({
+    //             name: proposalCandidatesName[index],
+    //             party: proposalCandidatesParty[index],
+    //             votesCount: 0
+    //         }));
+    //     }
+    // }
+
+
+    // MODIFIERS
 
     modifier isContractOwnerRightToVote() {
         require(
@@ -50,27 +67,51 @@ contract MyBallot {
         _;
     }
 
-    modifier isVoterVote(address voter) {
+    modifier isContractOwnerAddCandidate() {
         require(
-            !voters[voter].hasVoted,
+            areYouContractOwner(),
+            "Only the contract owner can add candidates."
+        );
+        _;
+    }
+
+    modifier isVoterVote(address voterAddress) {
+        require(
+            !isVoterVoted(voterAddress),
             "Voter already voted."
         );
         _;
     }
 
     modifier hasRightToVote() {
-        require(areYouHaveRigthToVote(), "You have not right to vote");
+        require(
+            areYouHaveRigthToVote(), 
+            "You have not right to vote"
+        );
         _;
     }
 
 
-    // functions
+    // FUNCTIONS
 
-    function giveRightToVote(address voter) public isContractOwnerRightToVote() isVoterVote(voter) {
-        voters[voter].canVote = true;
+    function addCandidateWithSpreadParameters(string memory name, string memory party) public isContractOwnerAddCandidate() {
+        candidates.push(Candidate({
+            name: name,
+            party: party,
+            votesCount: 0
+        }));
     }
 
-    function vote(string memory name) public isVoterVote(msg.sender) hasRightToVote(){
+        // when is a struct as parameter, it expects tuple which is [parameters]. Ex: ["ivy","party",0]. When is an array is like this. Ex [["ivy","party",0],[],[]]
+    function addCandidateAsStruct(Candidate memory newCandidate) public isContractOwnerAddCandidate() {
+        candidates.push(newCandidate);
+    }
+    
+    function giveRightToVote(address voterAddress) public isContractOwnerRightToVote() isVoterVote(voterAddress) {
+        voters[voterAddress].canVote = true;
+    }
+
+    function vote(string memory name) public isVoterVote(msg.sender) hasRightToVote() {
         Voter storage sender = voters[msg.sender]; // this is to show the usage of storage | I could use directly voters[msg.sender].hasVoted
         
         for (uint index = 0; index < candidates.length; index++) {
@@ -119,7 +160,15 @@ contract MyBallot {
         return isAnyoneHaveRigthToVote(msg.sender);
     }
 
-    function isAnyoneHaveRigthToVote(address voter) public view returns (bool) {
-        return voters[voter].canVote;
+    function isAnyoneHaveRigthToVote(address voterAddress) public view returns (bool) {
+        return voters[voterAddress].canVote;
+    }
+
+    function areYouVoted() public view returns (bool) {
+        return isVoterVoted(msg.sender);
+    }
+
+    function isVoterVoted(address voterAddress) public view returns (bool) {
+        return voters[voterAddress].hasVoted;
     }
 }
