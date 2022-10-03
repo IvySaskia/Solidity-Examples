@@ -1,0 +1,44 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			".deps/npm/solidity-string-util/contracts/StringUtil.sol": "StringUtil"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		".deps/npm/solidity-string-util/contracts/StringUtil.sol": {
+			"keccak256": "0xf25e7be9d20ffa565d47317b75810ffb602c006440b7c4e985478501be5c8121",
+			"urls": [
+				"bzz-raw://1f60e2f25d9bba898adb32aaa91dce9a6fb32b96e194265a3a9baac156c6162f",
+				"dweb:/ipfs/QmeXg8uQzrc6WpxvV2MDiKy9pSgP8a87S1LGegCSL742fy"
+			]
+		}
+	},
+	"version": 1
+}
