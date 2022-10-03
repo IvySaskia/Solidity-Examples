@@ -95,7 +95,6 @@ contract MyBallot {
         );
     }
 
-
     // FUNCTIONS
 
     function addCandidateWithSpreadParameters(string memory name, string memory party) public isContractOwnerAddCandidate() {
