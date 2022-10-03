@@ -8,18 +8,78 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string[]",
-						"name": "proposalCandidatesName",
-						"type": "string[]"
-					},
-					{
-						"internalType": "string[]",
-						"name": "proposalCandidatesParty",
-						"type": "string[]"
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "party",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "votesCount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct MyBallot.Candidate[]",
+						"name": "_candidates",
+						"type": "tuple[]"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "party",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "votesCount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct MyBallot.Candidate",
+						"name": "newCandidate",
+						"type": "tuple"
+					}
+				],
+				"name": "addCandidateAsStruct",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "party",
+						"type": "string"
+					}
+				],
+				"name": "addCandidateWithSpreadParameters",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [],
@@ -37,6 +97,19 @@
 			{
 				"inputs": [],
 				"name": "areYouHaveRigthToVote",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "areYouVoted",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -175,7 +248,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "voter",
+						"name": "voterAddress",
 						"type": "address"
 					}
 				],
@@ -188,11 +261,30 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "voter",
+						"name": "voterAddress",
 						"type": "address"
 					}
 				],
 				"name": "isAnyoneHaveRigthToVote",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "voterAddress",
+						"type": "address"
+					}
+				],
+				"name": "isVoterVoted",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -282,11 +374,18 @@
 	},
 	"sources": {
 		"contracts/Ballot/MyBallot.sol": {
-			"keccak256": "0x15e98b5daa93172d0586340110025cc8b691f4472198cbc579cd4c67f6112452",
+			"keccak256": "0x1018c7aaabff7fadc59a2495e834aa361a0d36135dcc0fc3be6fcd9b86ac580f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c414c9254c44912753c3c7a688073c5f37fc029ea0d7f52e587cb6ef2f451713",
-				"dweb:/ipfs/QmdcL2P9mn3mB3kykuf71MFvoQJSejfhH5GMJuZb1qbVnd"
+				"bzz-raw://8ed92edb621624e7fd8f658314cb5dd9ab800dea5d93b2b1cdbb8d03d09fa314",
+				"dweb:/ipfs/QmdCPMUduR1zZDwL2NKRnq49go9vDXyyqQ4WYb6S1YbEpn"
+			]
+		},
+		"solidity-string-util/contracts/StringUtil.sol": {
+			"keccak256": "0x285823e60c263c5b6ac685db9b8e5070b51dc3b013b13bd2a2858e2ebf11c978",
+			"urls": [
+				"bzz-raw://0851670765daf0f0ab896175fd07ea80a12eb4cbeee13751737dacdc3b7f97fc",
+				"dweb:/ipfs/QmPqXJLPhSu5QELPKC7NNW6JFCcVCrvyV2jEisWa9ggXUf"
 			]
 		}
 	},

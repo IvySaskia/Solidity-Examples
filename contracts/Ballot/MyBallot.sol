@@ -2,11 +2,11 @@
 
 pragma solidity >=0.5.0 <0.9.0;
 
-// import "solidity-string-util/contracts/StringUtil.sol";
+import "solidity-string-util/contracts/StringUtil.sol";
 
 contract MyBallot {
 
-    // using StringUtil for string;
+    using StringUtil for string;
 
     struct Voter {
         bool canVote;
@@ -42,7 +42,7 @@ contract MyBallot {
         }
     }
 
-    // constructor 2 // overloading constructor is not allowed
+        // constructor 2 // overloading constructor is not allowed
     // constructor(string[] memory proposalCandidatesName, string[] memory proposalCandidatesParty) {
         
     //     contractOwner = msg.sender;
@@ -115,7 +115,7 @@ contract MyBallot {
         Voter storage sender = voters[msg.sender]; // this is to show the usage of storage | I could use directly voters[msg.sender].hasVoted
         
         for (uint index = 0; index < candidates.length; index++) {
-            if (keccak256(abi.encode(candidates[index].name)) == keccak256(abi.encode(name)))
+            if (StringUtil.equalTo(candidates[index].name,name))
                 candidates[index].votesCount++;
                 sender.hasVoted = true;
                 totalVotes++;
@@ -171,4 +171,14 @@ contract MyBallot {
     function isVoterVoted(address voterAddress) public view returns (bool) {
         return voters[voterAddress].hasVoted;
     }
+
+    // OTHER FUNCTIONS
+
+    // function isSameString(string memory s1, string memory s2) internal pure returns (bool) {
+    //     return StringUtil.toHash(s1) == StringUtil.toHash(s2);
+    // }
+
+    // function isSameString(string memory s1, string memory s2) internal pure returns (bool) {
+    //     return keccak256(abi.encode(s1)) == keccak256(abi.encode(s2));
+    // }
 }

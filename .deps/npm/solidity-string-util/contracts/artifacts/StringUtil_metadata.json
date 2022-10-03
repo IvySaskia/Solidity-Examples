@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.17+commit.8df45f5f"
+		"version": "0.8.7+commit.e28d00a7"
 	},
 	"language": "Solidity",
 	"output": {
@@ -33,10 +33,10 @@
 	},
 	"sources": {
 		".deps/npm/solidity-string-util/contracts/StringUtil.sol": {
-			"keccak256": "0xf25e7be9d20ffa565d47317b75810ffb602c006440b7c4e985478501be5c8121",
+			"keccak256": "0x285823e60c263c5b6ac685db9b8e5070b51dc3b013b13bd2a2858e2ebf11c978",
 			"urls": [
-				"bzz-raw://1f60e2f25d9bba898adb32aaa91dce9a6fb32b96e194265a3a9baac156c6162f",
-				"dweb:/ipfs/QmeXg8uQzrc6WpxvV2MDiKy9pSgP8a87S1LGegCSL742fy"
+				"bzz-raw://0851670765daf0f0ab896175fd07ea80a12eb4cbeee13751737dacdc3b7f97fc",
+				"dweb:/ipfs/QmPqXJLPhSu5QELPKC7NNW6JFCcVCrvyV2jEisWa9ggXUf"
 			]
 		}
 	},
