@@ -134,7 +134,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "getWinningProposal",
+				"name": "getWinningCandidate",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -224,11 +224,11 @@
 	},
 	"sources": {
 		"contracts/Ballot/MyBallot.sol": {
-			"keccak256": "0x91579a0f1f9a2690e2cb54ceaf96e0882ad967fb8d55805a913a6b5b89c5b21b",
+			"keccak256": "0x464cc551a04ae77c6d5a756fe739d98fa5e9dcb982b18b27cd65886005532734",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://829f114c51e9c90000c0d8b547ee439a27a16b599e2a3a320936a550c9896647",
-				"dweb:/ipfs/QmbNzFfe1NnRvxx6hn7As7FYsCvXtS9ytaC8bvpXPA1yAw"
+				"bzz-raw://4ce748ce110acc01c08dee5a96f13fe9b88ba9c4158c190402a7a20f8bf21ff2",
+				"dweb:/ipfs/QmWdwFdkCNwJF8tMk6L1ZMqJBDuhyhBvtFQEy1LZQPukma"
 			]
 		}
 	},

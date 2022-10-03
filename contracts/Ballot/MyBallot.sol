@@ -63,7 +63,7 @@ contract MyBallot {
         }
     }
 
-    function getWinningProposal() public view returns (uint winningProposal)
+    function getWinningCandidate() public view returns (uint winningProposal)
     {
         uint winningVoteCount;
 
@@ -77,7 +77,7 @@ contract MyBallot {
 
     function getWinnerName() public view returns (string memory winnerName)
     {
-        winnerName = candidates[getWinningProposal()].name;
+        winnerName = candidates[getWinningCandidate()].name;
     }
 
     function getCandidatesList() public view returns (Candidate[] memory) {
