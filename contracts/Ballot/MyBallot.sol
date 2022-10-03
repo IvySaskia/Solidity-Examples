@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity >=0.5.0 <0.9.0;
+pragma solidity >=0.7.0 <0.9.0;
 
 import "solidity-string-util/contracts/StringUtil.sol";
 
@@ -59,14 +59,6 @@ contract MyBallot {
 
     // MODIFIERS
 
-    modifier isContractOwnerRightToVote() {
-        require(
-            areYouContractOwner(),
-            "Only the contract owner can give right to vote."
-        );
-        _;
-    }
-
     modifier isContractOwnerAddCandidate() {
         require(
             areYouContractOwner(),
@@ -75,20 +67,32 @@ contract MyBallot {
         _;
     }
 
-    modifier isVoterVote(address voterAddress) {
+    modifier giveRightToVoteModifier(address voterAddress) {
         require(
-            !isVoterVoted(voterAddress),
-            "Voter already voted."
+            areYouContractOwner(),
+            "Only the contract owner can give right to vote."
         );
+        getVoterVotedRequire(voterAddress);
         _;
     }
 
-    modifier hasRightToVote() {
+    modifier voteModifier(address voterAddress) {
         require(
             areYouHaveRigthToVote(), 
             "You have not right to vote"
         );
-        _;
+        getVoterVotedRequire(voterAddress);
+        _;        
+    }
+
+
+    // REQUIRES
+
+    function getVoterVotedRequire(address voterAddress) private view {
+        return require(
+            !getVoterVoter(voterAddress),
+            "Voter already voted."
+        );
     }
 
 
@@ -107,32 +111,41 @@ contract MyBallot {
         candidates.push(newCandidate);
     }
     
-    function giveRightToVote(address voterAddress) public isContractOwnerRightToVote() isVoterVote(voterAddress) {
+    function giveRightToVote(address voterAddress) public giveRightToVoteModifier(voterAddress) {
         voters[voterAddress].canVote = true;
     }
 
-    function vote(string memory name) public isVoterVote(msg.sender) hasRightToVote() {
+    function vote(string memory name) public voteModifier(msg.sender) {
         Voter storage sender = voters[msg.sender]; // this is to show the usage of storage | I could use directly voters[msg.sender].hasVoted
         
         for (uint index = 0; index < candidates.length; index++) {
-            if (StringUtil.equalTo(candidates[index].name,name))
+            if (StringUtil.equalTo(candidates[index].name,name)) {
                 candidates[index].votesCount++;
                 sender.hasVoted = true;
                 totalVotes++;
+            }
         }
     }
 
     function getWinnerName() public view returns (string memory winnerName) {
-        winnerName = candidates[getWinningCandidate()].name;
+        (uint winningProposal, bool isTie) = getWinningCandidate();
+        require(
+            !isTie,
+            "There is a tie on Ballot"
+        );
+        winnerName = candidates[winningProposal].name;
     }
 
-    function getWinningCandidate() public view returns (uint winningProposal) {
+    function getWinningCandidate() public view returns (uint winningProposal, bool isTie) {        
         uint winningVoteCount;
 
         for (uint indexCandidate = 0; indexCandidate < candidates.length; indexCandidate++) {
             if (candidates[indexCandidate].votesCount > winningVoteCount) {
                 winningVoteCount = candidates[indexCandidate].votesCount;
                 winningProposal = indexCandidate;
+                isTie = false;
+            } else if (candidates[indexCandidate].votesCount == winningVoteCount) {
+                isTie = true;
             }
         }
     }
@@ -157,18 +170,18 @@ contract MyBallot {
     }
 
     function areYouHaveRigthToVote() public view returns (bool) {
-        return isAnyoneHaveRigthToVote(msg.sender);
+        return getVoterRigthToVote(msg.sender);
     }
 
-    function isAnyoneHaveRigthToVote(address voterAddress) public view returns (bool) {
+    function getVoterRigthToVote(address voterAddress) public view returns (bool) {
         return voters[voterAddress].canVote;
     }
 
     function areYouVoted() public view returns (bool) {
-        return isVoterVoted(msg.sender);
+        return getVoterVoter(msg.sender);
     }
 
-    function isVoterVoted(address voterAddress) public view returns (bool) {
+    function getVoterVoter(address voterAddress) public view returns (bool) {
         return voters[voterAddress].hasVoted;
     }
 
