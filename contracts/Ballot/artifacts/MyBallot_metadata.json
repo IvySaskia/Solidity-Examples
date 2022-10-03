@@ -23,6 +23,32 @@
 			},
 			{
 				"inputs": [],
+				"name": "areYouContractOwner",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "areYouHaveRigthToVote",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "calculateAmountOfTotalVotes",
 				"outputs": [
 					{
@@ -161,6 +187,38 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "voter",
+						"type": "address"
+					}
+				],
+				"name": "isAnyoneHaveRigthToVote",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalVotes",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "string",
 						"name": "name",
 						"type": "string"
@@ -224,11 +282,11 @@
 	},
 	"sources": {
 		"contracts/Ballot/MyBallot.sol": {
-			"keccak256": "0x464cc551a04ae77c6d5a756fe739d98fa5e9dcb982b18b27cd65886005532734",
+			"keccak256": "0x15e98b5daa93172d0586340110025cc8b691f4472198cbc579cd4c67f6112452",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4ce748ce110acc01c08dee5a96f13fe9b88ba9c4158c190402a7a20f8bf21ff2",
-				"dweb:/ipfs/QmWdwFdkCNwJF8tMk6L1ZMqJBDuhyhBvtFQEy1LZQPukma"
+				"bzz-raw://c414c9254c44912753c3c7a688073c5f37fc029ea0d7f52e587cb6ef2f451713",
+				"dweb:/ipfs/QmdcL2P9mn3mB3kykuf71MFvoQJSejfhH5GMJuZb1qbVnd"
 			]
 		}
 	},

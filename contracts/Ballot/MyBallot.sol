@@ -25,6 +25,8 @@ contract MyBallot {
 
     Candidate[] public candidates;
 
+    uint public totalVotes; // alternative for calculateAmountOfTotalVotes
+
     constructor(string[] memory proposalCandidatesName, string[] memory proposalCandidatesParty) {
         
         contractOwner = msg.sender;
@@ -38,33 +40,52 @@ contract MyBallot {
         }
     }
 
-    function giveRightToVote(address voter) public {
+    // modifiers
+
+    modifier isContractOwnerRightToVote() {
         require(
-            msg.sender == contractOwner,
+            areYouContractOwner(),
             "Only the contract owner can give right to vote."
         );
+        _;
+    }
+
+    modifier isVoterVote(address voter) {
         require(
             !voters[voter].hasVoted,
-            "The voter already voted."
+            "Voter already voted."
         );
+        _;
+    }
+
+    modifier hasRightToVote() {
+        require(areYouHaveRigthToVote(), "You have not right to vote");
+        _;
+    }
+
+
+    // functions
+
+    function giveRightToVote(address voter) public isContractOwnerRightToVote() isVoterVote(voter) {
         voters[voter].canVote = true;
     }
 
-    function vote(string memory name) public {
-        Voter storage sender = voters[msg.sender];
+    function vote(string memory name) public isVoterVote(msg.sender) hasRightToVote(){
+        Voter storage sender = voters[msg.sender]; // this is to show the usage of storage | I could use directly voters[msg.sender].hasVoted
         
-        require(sender.canVote, "Has no right to vote");
-        require(!sender.hasVoted, "Already voted.");
-
         for (uint index = 0; index < candidates.length; index++) {
-            if(keccak256(abi.encode(candidates[index].name)) == keccak256(abi.encode(name)))
-                candidates[index].votesCount ++;
+            if (keccak256(abi.encode(candidates[index].name)) == keccak256(abi.encode(name)))
+                candidates[index].votesCount++;
                 sender.hasVoted = true;
+                totalVotes++;
         }
     }
 
-    function getWinningCandidate() public view returns (uint winningProposal)
-    {
+    function getWinnerName() public view returns (string memory winnerName) {
+        winnerName = candidates[getWinningCandidate()].name;
+    }
+
+    function getWinningCandidate() public view returns (uint winningProposal) {
         uint winningVoteCount;
 
         for (uint indexCandidate = 0; indexCandidate < candidates.length; indexCandidate++) {
@@ -73,11 +94,6 @@ contract MyBallot {
                 winningProposal = indexCandidate;
             }
         }
-    }
-
-    function getWinnerName() public view returns (string memory winnerName)
-    {
-        winnerName = candidates[getWinningCandidate()].name;
     }
 
     function getCandidatesList() public view returns (Candidate[] memory) {
@@ -93,5 +109,17 @@ contract MyBallot {
         for (uint index = 0; index < candidates.length; index++) {
             total += candidates[index].votesCount;
         }
+    }
+
+    function areYouContractOwner() public view returns (bool) {
+        return msg.sender == contractOwner;
+    }
+
+    function areYouHaveRigthToVote() public view returns (bool) {
+        return isAnyoneHaveRigthToVote(msg.sender);
+    }
+
+    function isAnyoneHaveRigthToVote(address voter) public view returns (bool) {
+        return voters[voter].canVote;
     }
 }
