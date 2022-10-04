@@ -194,3 +194,10 @@ contract MyBallot {
     //     return keccak256(abi.encode(s1)) == keccak256(abi.encode(s2));
     // }
 }
+
+// TO DO for practice
+// - Set limit of votes || set range of time to vote AND/OR set option to start voting and close voting
+// - Douplicated candidates
+// - Add more information to VOTER
+// - wait list for people to vote, because we need to set more information of the voter like name, age, id, who will write this? smart contract owner when is giving rigth or the person who is making a request
+// - Add more information to CANDIDATES
